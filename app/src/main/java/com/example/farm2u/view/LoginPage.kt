@@ -38,7 +38,7 @@ import com.example.farm2u.R
 import com.example.farm2u.viewModel.BuyLoginViewModel
 
 @Composable
-fun BuyLogin(navController: NavHostController, viewModel: BuyLoginViewModel = viewModel() ) {
+fun Login(navController: NavHostController, viewModel: BuyLoginViewModel = viewModel() ) {
     Column (
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -166,5 +166,5 @@ fun BuyLogin(navController: NavHostController, viewModel: BuyLoginViewModel = vi
 @Preview(showBackground = true)
 @Composable
 fun LoginPreview() {
-    BuyLogin(navController = rememberNavController())
+    Login(navController = rememberNavController())
 }

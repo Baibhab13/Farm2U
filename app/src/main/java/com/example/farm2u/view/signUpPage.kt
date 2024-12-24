@@ -137,7 +137,7 @@ fun Form(navController: NavHostController, viewModel: signUpViewModel) {
         )
 
         Button(
-            onClick = { navController.navigate("home") },
+            onClick = { navController.navigate("login") },
             modifier = Modifier.padding(top = 16.dp).fillMaxWidth()
                 .clip(RectangleShape)
         ) {
@@ -146,7 +146,7 @@ fun Form(navController: NavHostController, viewModel: signUpViewModel) {
             )
         }
 
-        Row() {
+        Row {
             Text(
                 text = "Already have an account?",
                 fontSize = 15.sp,
@@ -158,10 +158,9 @@ fun Form(navController: NavHostController, viewModel: signUpViewModel) {
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.c5),
                 modifier = Modifier.align(Alignment.CenterVertically).padding(top = 10.dp, start = 5.dp)
-                    .clickable { navController.navigate("buylogin") }
+                    .clickable { navController.navigate("login") }
             )
         }
-
     }
 }
 

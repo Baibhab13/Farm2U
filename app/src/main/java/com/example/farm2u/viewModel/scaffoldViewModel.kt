@@ -1,9 +1,9 @@
 package com.example.farm2u.viewModel
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -48,6 +48,6 @@ class ScaffoldViewModel: ViewModel() {
         NavItem("Home", Icons.Default.Home),
         NavItem("Favourites", Icons.Filled.Favorite ),
         NavItem("Cart", Icons.Default.ShoppingCart),
-        NavItem("Profile", Icons.Default.Person),
+        NavItem("Negotiate", Icons.Default.Email),
     )
 }

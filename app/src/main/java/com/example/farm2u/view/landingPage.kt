@@ -102,7 +102,7 @@ fun Header(navController: NavHostController) {
                 .padding(bottom = 16.dp)
         ) {
             Button(
-                onClick = { navController.navigate("buylogin") },
+                onClick = { navController.navigate("login") },
                 modifier = Modifier.padding(end = 1.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.c1)
@@ -116,7 +116,7 @@ fun Header(navController: NavHostController) {
             }
 
             Button(
-                onClick = { navController.navigate("buylogin") },
+                onClick = { navController.navigate("login") },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.c1)
                 ),

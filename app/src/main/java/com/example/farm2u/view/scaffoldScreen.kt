@@ -5,10 +5,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,7 +35,7 @@ import com.example.farm2u.viewModel.ScaffoldViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ScaffoldScreen(navController: NavHostController,viewModel: ScaffoldViewModel = viewModel()) {
+fun ScaffoldScreen(navController: NavHostController) {
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -54,15 +55,14 @@ fun ScaffoldScreen(navController: NavHostController,viewModel: ScaffoldViewModel
 @Composable
 fun ContentScreen(viewModel: ScaffoldViewModel = viewModel()) {
     when(viewModel.selectedIndex.intValue) {
-        0 -> Home(
-            navController = rememberNavController(),
-            viewModel = HomeViewModel()
-        )
+        0 -> Home(navController = rememberNavController(), viewModel = HomeViewModel())
         1 -> Favourites()
         2 -> ShoppingCart()
-        3 -> Profile()
+        3 -> Negotiate(navController = rememberNavController())
     }
 }
+
+
 
 @Composable
 fun Fab(navController: NavHostController) {
@@ -107,29 +107,11 @@ fun Topbar(navController: NavHostController, viewModel: ScaffoldViewModel = view
                 0 -> Text("Farm2U")
                 1 -> Text("Favourites")
                 2 -> Text("Shopping Cart")
-                3 -> Text("Profile")
+                3 -> Text("Negotiation")
             }
         },
         actions = {
-            // Notification Icon
-            IconButton(onClick = {
-                /*TODO*/
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Notifications,
-                    contentDescription = "Notifications"
-                )
-            }
-            // Message Icon
-            IconButton(onClick = {
-                /*TODO*/
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Email,
-                    contentDescription = "Messages"
-                )
-            }
-            // Settings Dropdown Menu
+            //Dropdown Menu
             IconButton(onClick = { viewModel.expandeds.value = true }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
@@ -137,13 +119,28 @@ fun Topbar(navController: NavHostController, viewModel: ScaffoldViewModel = view
                 )
             }
             DropdownMenu(
+                modifier = Modifier.width(150.dp),
                 expanded = viewModel.expandeds.value,
                 onDismissRequest = { viewModel.expandeds.value = false }
             ) {
                 DropdownMenuItem(
-                    text = { Text("language") },
+                    text = { Text("Profile") },
                     onClick = {
                         //a dropdown menu appear to choose a language
+                        viewModel.expandeds.value = false
+                    }
+                )
+                DropdownMenuItem(
+                    text = { Text("Language") },
+                    onClick = {
+                        viewModel.onDropdownItemClick("Language")
+                        viewModel.expandeds.value = false
+                    }
+                )
+                DropdownMenuItem(
+                    text = { Text("Setting") },
+                    onClick = {
+                        viewModel.onDropdownItemClick("Setting")
                         viewModel.expandeds.value = false
                     }
                 )

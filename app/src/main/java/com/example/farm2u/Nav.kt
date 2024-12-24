@@ -8,12 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.view.AboutUs
-import com.example.farm2u.view.BuyLogin
 import com.example.farm2u.view.ChatPage
 import com.example.farm2u.view.Favourites
 import com.example.farm2u.view.ForgotPassword
 import com.example.farm2u.view.Home
 import com.example.farm2u.view.LandingPage
+import com.example.farm2u.view.Login
+import com.example.farm2u.view.Profile
 import com.example.farm2u.view.ScaffoldScreen
 import com.example.farm2u.view.SignUp
 
@@ -31,8 +32,8 @@ fun Nav() {
             AboutUs()
         }
 
-        composable("buylogin") {
-            BuyLogin(navController = navCtrl)
+        composable("login") {
+            Login(navController = navCtrl)
         }
 
         composable("signup") {
@@ -59,6 +60,10 @@ fun Nav() {
 
         composable("chatbot") {
             ChatPage(navController = navCtrl, viewModel = viewModel())
+        }
+
+        composable("profile") {
+            Profile(navController = navCtrl)
         }
     }
 }
