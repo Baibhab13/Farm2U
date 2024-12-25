@@ -28,24 +28,23 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.R
 import com.example.farm2u.viewModel.BuyLoginViewModel
 
 @Composable
-fun Login(navController: NavHostController, viewModel: BuyLoginViewModel = viewModel() ) {
+fun Login(navController: NavHostController, viewModel: BuyLoginViewModel = viewModel(), usertype : String? ) {
+     val user = if (usertype == "buy") "Buyer" else "Seller"
     Column (
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Welcome Costumers\nGet Fresh Products",
+            text = "Welcome $user",
             fontSize = 20.sp,
             style = TextStyle(
                 textAlign = TextAlign.Center,
@@ -100,7 +99,11 @@ fun Login(navController: NavHostController, viewModel: BuyLoginViewModel = viewM
 
         Button(
             onClick = {
-                navController.navigate("scaffold")
+                if (usertype == "buy") {
+                    navController.navigate("scaffold")
+                } else {
+                    navController.navigate("farmer scaffold")
+                }
             },
             modifier = Modifier.padding(16.dp)
         ) {
@@ -161,10 +164,4 @@ fun Login(navController: NavHostController, viewModel: BuyLoginViewModel = viewM
 
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginPreview() {
-    Login(navController = rememberNavController())
 }

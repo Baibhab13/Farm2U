@@ -25,12 +25,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.R
 import com.example.farm2u.model.FAQItem
 import com.example.farm2u.viewModel.LandingPageViewModel
@@ -102,7 +100,7 @@ fun Header(navController: NavHostController) {
                 .padding(bottom = 16.dp)
         ) {
             Button(
-                onClick = { navController.navigate("login") },
+                onClick = { navController.navigate("login / sell") },
                 modifier = Modifier.padding(end = 1.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.c1)
@@ -116,7 +114,7 @@ fun Header(navController: NavHostController) {
             }
 
             Button(
-                onClick = { navController.navigate("login") },
+                onClick = { navController.navigate("login / buy") },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.c1)
                 ),
@@ -238,8 +236,3 @@ fun Footer(navController: NavHostController) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun LandingPagePreview() {
-    LandingPage(navController = rememberNavController())
-}

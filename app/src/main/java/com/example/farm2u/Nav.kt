@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.view.AboutUs
 import com.example.farm2u.view.ChatPage
+import com.example.farm2u.view.FarmerScaffold
 import com.example.farm2u.view.Favourites
 import com.example.farm2u.view.ForgotPassword
 import com.example.farm2u.view.Home
@@ -32,8 +33,9 @@ fun Nav() {
             AboutUs()
         }
 
-        composable("login") {
-            Login(navController = navCtrl)
+        composable("login / {usertype}") { backStackEntry ->
+            val usertype = backStackEntry.arguments?.getString("usertype") ?: "buy"
+            Login(navController = navCtrl, usertype = usertype)
         }
 
         composable("signup") {
@@ -65,6 +67,13 @@ fun Nav() {
         composable("profile") {
             Profile(navController = navCtrl)
         }
+
+        ////////////////////////////////////////////////////
+
+        composable("farmer scaffold") {
+            FarmerScaffold(navController = navCtrl)
+        }
+
     }
 }
 
