@@ -7,9 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,7 +22,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -69,7 +66,10 @@ fun Fab(navController: NavHostController) {
     FloatingActionButton(onClick = {
         navController.navigate("chatbot")
     }) {
-        Image(painterResource(R.drawable.chatbot), contentDescription = "chatbot", modifier = Modifier.size(35.dp))
+        Image(painterResource(R.drawable.chatbot),
+            contentDescription = "chatbot",
+            modifier = Modifier.size(35.dp)
+        )
     }
 }
 
@@ -112,7 +112,7 @@ fun Topbar(navController: NavHostController, viewModel: ScaffoldViewModel = view
         },
         actions = {
             //Dropdown Menu
-            IconButton(onClick = { viewModel.expandeds.value = true }) {
+            IconButton(onClick = { viewModel.expanded.value = true }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
                     contentDescription = "More options"
@@ -120,44 +120,35 @@ fun Topbar(navController: NavHostController, viewModel: ScaffoldViewModel = view
             }
             DropdownMenu(
                 modifier = Modifier.width(150.dp),
-                expanded = viewModel.expandeds.value,
-                onDismissRequest = { viewModel.expandeds.value = false }
+                expanded = viewModel.expanded.value,
+                onDismissRequest = { viewModel.expanded.value = false }
             ) {
                 DropdownMenuItem(
                     text = { Text("Profile") },
                     onClick = {
                         //a dropdown menu appear to choose a language
-                        viewModel.expandeds.value = false
+                        viewModel.expanded.value = false
                     }
                 )
                 DropdownMenuItem(
                     text = { Text("Language") },
                     onClick = {
-                        viewModel.onDropdownItemClick("Language")
-                        viewModel.expandeds.value = false
+                        viewModel.expanded.value = false
                     }
                 )
                 DropdownMenuItem(
                     text = { Text("Setting") },
                     onClick = {
-                        viewModel.onDropdownItemClick("Setting")
-                        viewModel.expandeds.value = false
+                        viewModel.expanded.value = false
                     }
                 )
                 DropdownMenuItem(
                     text = { Text("Logout") },
                     onClick = {
-                        viewModel.onDropdownItemClick("Logout")
-                        viewModel.expandeds.value = false
+                        viewModel.expanded.value = false
                     }
                 )
             }
         }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomePreview() {
-    ScaffoldScreen(navController = rememberNavController())
 }
