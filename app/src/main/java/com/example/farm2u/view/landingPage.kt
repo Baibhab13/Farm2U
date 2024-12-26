@@ -198,7 +198,7 @@ fun Footer(navController: NavHostController) {
             color = Color.White,
             modifier = Modifier
                 .align(Alignment.Start)
-                .padding(start = 10.dp, bottom = 5.dp, top = 10.dp)
+                .padding(start = 20.dp, bottom = 5.dp, top = 10.dp)
                 .clickable { navController.navigate("about us") },
             fontWeight = FontWeight.Bold
         )
@@ -211,12 +211,12 @@ fun Footer(navController: NavHostController) {
             color = Color.White,
             modifier = Modifier
                 .align(Alignment.Start)
-                .padding(start = 10.dp, bottom = 5.dp)
+                .padding(start = 20.dp, bottom = 5.dp)
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 10.dp, bottom = 10.dp),
+                .padding(start = 20.dp, bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(

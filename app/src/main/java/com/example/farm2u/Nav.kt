@@ -55,7 +55,7 @@ fun Nav() {
         ///////////////////////* Buyer's Screen*/////////////////////////////
 
         composable("scaffold") {
-            ScaffoldScreen(navController = navCtrl)
+            ScaffoldScreen(navController = navCtrl, viewModel = viewModel())
         }
 
         composable("home") {
@@ -77,7 +77,10 @@ fun Nav() {
         ///////////////////* Farmer's Screen */////////////////////////////////
 
         composable("farmer scaffold") {
-            FarmerScaffold(navController = navCtrl)
+            FarmerScaffold(
+                navController = navCtrl,
+                viewModel = viewModel()
+            )
         }
 
         composable("farmer home") {

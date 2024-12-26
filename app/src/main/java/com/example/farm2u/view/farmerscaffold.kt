@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -31,7 +32,7 @@ import com.example.farm2u.viewModel.ScaffoldViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FarmerScaffold(navController: NavHostController) {
+fun FarmerScaffold(navController: NavHostController,viewModel: ScaffoldViewModel) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -41,7 +42,11 @@ fun FarmerScaffold(navController: NavHostController) {
             FarmerBottomNavigation()
         },
         floatingActionButton = {
-            FarmerFab(navController)
+            when(viewModel.selectedIndex.intValue) {
+                0 -> FarmerFab(navController)
+                1 -> FarmerAddButton()
+            }
+
         }
     ) {
         FarmerContentScreen()
@@ -149,6 +154,18 @@ fun FarmerFab(navController: NavHostController) {
             painterResource(R.drawable.chatbot),
             contentDescription = "chatbot",
             modifier = Modifier.size(35.dp)
+        )
+    }
+}
+
+@Composable
+fun FarmerAddButton() {
+    FloatingActionButton(onClick = {
+
+    }) {
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Add"
         )
     }
 }

@@ -32,7 +32,7 @@ import com.example.farm2u.viewModel.ScaffoldViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ScaffoldScreen(navController: NavHostController) {
+fun ScaffoldScreen(navController: NavHostController, viewModel: ScaffoldViewModel) {
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -42,7 +42,9 @@ fun ScaffoldScreen(navController: NavHostController) {
             BottomNavigation()
         },
         floatingActionButton = {
-            Fab(navController)
+            when(viewModel.selectedIndex.intValue) {
+                0 -> Fab(navController)
+            }
         }
     ) {
         ContentScreen()
