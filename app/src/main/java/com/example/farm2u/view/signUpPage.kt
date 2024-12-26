@@ -137,7 +137,7 @@ fun Form(navController: NavHostController, viewModel: signUpViewModel) {
         )
 
         Button(
-            onClick = { navController.navigate("login") },
+            onClick = { navController.popBackStack() },
             modifier = Modifier.padding(top = 16.dp).fillMaxWidth()
                 .clip(RectangleShape)
         ) {
@@ -158,7 +158,7 @@ fun Form(navController: NavHostController, viewModel: signUpViewModel) {
                 fontWeight = FontWeight.Bold,
                 color = colorResource(R.color.c5),
                 modifier = Modifier.align(Alignment.CenterVertically).padding(top = 10.dp, start = 5.dp)
-                    .clickable { navController.navigate("login") }
+                    .clickable { navController.popBackStack() }
             )
         }
     }

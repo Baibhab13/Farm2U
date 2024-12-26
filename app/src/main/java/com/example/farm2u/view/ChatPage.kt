@@ -180,7 +180,7 @@ fun AppHeader(navController: NavHostController) {
     ) {
         IconButton(
             onClick = {
-                navController.navigate("scaffold")
+                navController.popBackStack()
             },
             modifier = Modifier.align(Alignment.CenterVertically)
         ){
