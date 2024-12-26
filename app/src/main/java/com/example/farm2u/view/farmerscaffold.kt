@@ -2,8 +2,6 @@ package com.example.farm2u.view
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,7 +18,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -47,13 +44,19 @@ fun FarmerScaffold(navController: NavHostController) {
             FarmerFab(navController)
         }
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "Farmer Scaffold")
-        }
+        FarmerContentScreen()
+    }
+}
+
+@Composable
+fun FarmerContentScreen(viewModel: ScaffoldViewModel = viewModel()) {
+    when(viewModel.selectedIndex.intValue) {
+        0 -> FarmerHome(
+            navController = rememberNavController()
+        )
+        1 -> FarmerAdd()
+        2 -> FarmerOrders()
+        3 -> FarmerNegotiate()
     }
 }
 
@@ -89,8 +92,8 @@ fun FarmerTopbar(navController: NavHostController, viewModel: ScaffoldViewModel 
         title = {
             when(viewModel.selectedIndex.intValue) {
                 0 -> Text("Farm2U")
-                1 -> Text("Favourites")
-                2 -> Text("Shopping Cart")
+                1 -> Text("Add")
+                2 -> Text("Orders")
                 3 -> Text("Negotiation")
             }
         },

@@ -59,8 +59,6 @@ fun ContentScreen(viewModel: ScaffoldViewModel = viewModel()) {
     }
 }
 
-
-
 @Composable
 fun Fab(navController: NavHostController) {
     FloatingActionButton(onClick = {
