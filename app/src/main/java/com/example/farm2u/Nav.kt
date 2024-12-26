@@ -46,7 +46,7 @@ fun Nav() {
             ForgotPassword(navController = navCtrl)
         }
 
-        ////////////////////////////////////////////////////
+        ///////////////////////* Buyer's Screen*/////////////////////////////
 
         composable("scaffold") {
             ScaffoldScreen(navController = navCtrl)
@@ -68,7 +68,7 @@ fun Nav() {
             Profile(navController = navCtrl)
         }
 
-        ////////////////////////////////////////////////////
+        ///////////////////* Farmer's Screen */////////////////////////////////
 
         composable("farmer scaffold") {
             FarmerScaffold(navController = navCtrl)
