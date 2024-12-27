@@ -3,6 +3,7 @@ package com.example.farm2u.view
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,13 +31,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.model.GridItem
+import com.example.farm2u.navigation.Screens
 import com.example.farm2u.viewModel.FarmerHomeViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -69,14 +70,13 @@ fun FarmerHome(navController: NavHostController) {
                 modifier = Modifier.padding(10.dp)
             )
 
-            GridScreen()
+            GridScreen(navController = navController)
         }
-
     }
 }
 
 @Composable
-fun GridScreen(viewModel: FarmerHomeViewModel = viewModel()) {
+fun GridScreen(viewModel: FarmerHomeViewModel = viewModel(), navController: NavController) {
     val items = viewModel.gridItems
 
     LazyVerticalGrid(
@@ -86,27 +86,36 @@ fun GridScreen(viewModel: FarmerHomeViewModel = viewModel()) {
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(items) { item ->
-            GridCell(item)
+            GridCell(item,navController)
         }
     }
 }
 
 @Composable
-fun GridCell(item: GridItem) {
+fun GridCell(item: GridItem, navController: NavController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1f) // Ensures a square cell
-            .padding(8.dp),
-        shape = RoundedCornerShape(12.dp), // Rounded corners
-        elevation = CardDefaults.cardElevation(8.dp)// Elevation for shadow effect
+            .aspectRatio(1f)
+            .padding(8.dp)
+            .clickable {
+                // Navigate based on item name or ID
+                when (item.id) {
+                    1 -> navController.navigate(Screens.Farm.route)
+                    2 -> navController.navigate(Screens.History.route)
+                    3 -> navController.navigate(Screens.Inventory.route)
+                    4 -> navController.navigate(Screens.Crop.route)
+                }
+            },
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp), // Inner padding for better spacing
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween // Ensures spacing between elements
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
             Image(
                 painter = painterResource(id = item.imageRes),

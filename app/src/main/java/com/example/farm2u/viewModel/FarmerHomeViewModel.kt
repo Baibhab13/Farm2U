@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.farm2u.R
 import com.example.farm2u.model.GridItem
 
-class FarmerHomeViewModel : ViewModel(){
+class FarmerHomeViewModel: ViewModel() {
     var gridItems = mutableStateListOf<GridItem>()
         private set
 
@@ -17,12 +17,11 @@ class FarmerHomeViewModel : ViewModel(){
     private fun loadGridItems() {
         gridItems.addAll(
             listOf(
-                GridItem("Farm", R.drawable.farm),
-                GridItem("History", R.drawable.history),
-                GridItem("Inventory", R.drawable.inventory),
-                GridItem("Crops", R.drawable.crops)
+                GridItem(1,"Farm", R.drawable.farm),
+                GridItem(2,"History", R.drawable.history),
+                GridItem(3,"Inventory", R.drawable.inventory),
+                GridItem(4,"Crops", R.drawable.crops)
             )
         )
     }
 }
-
