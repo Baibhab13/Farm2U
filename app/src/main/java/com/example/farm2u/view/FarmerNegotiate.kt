@@ -10,10 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FarmerNegotiate() {
+fun FarmerNegotiate(navController: NavController) {
     Scaffold (
         modifier = Modifier
             .fillMaxSize()

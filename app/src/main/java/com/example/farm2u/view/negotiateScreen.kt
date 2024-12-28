@@ -7,11 +7,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Negotiate(navController: NavHostController) {
+fun Negotiate(navController: NavController) {
     Scaffold (
         modifier = Modifier
             .fillMaxSize()

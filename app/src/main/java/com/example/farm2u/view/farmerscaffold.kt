@@ -25,6 +25,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.R
@@ -32,7 +33,7 @@ import com.example.farm2u.viewModel.ScaffoldViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FarmerScaffold(navController: NavHostController,viewModel: ScaffoldViewModel) {
+fun FarmerScaffold(navController: NavController,viewModel: ScaffoldViewModel) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -44,24 +45,24 @@ fun FarmerScaffold(navController: NavHostController,viewModel: ScaffoldViewModel
         floatingActionButton = {
             when(viewModel.selectedIndex.intValue) {
                 0 -> FarmerFab(navController)
-                1 -> FarmerAddButton()
+                1 -> FarmerAddButton(navController)
             }
 
         }
     ) {
-        FarmerContentScreen()
+        FarmerContentScreen(navController)
     }
 }
 
 @Composable
-fun FarmerContentScreen(viewModel: ScaffoldViewModel = viewModel()) {
+fun FarmerContentScreen(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
     when(viewModel.selectedIndex.intValue) {
         0 -> FarmerHome(
-            navController = rememberNavController()
+            navController
         )
-        1 -> FarmerAdd()
-        2 -> FarmerOrders()
-        3 -> FarmerNegotiate()
+        1 -> FarmerAdd(navController)
+        2 -> FarmerOrders(navController)
+        3 -> FarmerNegotiate(navController)
     }
 }
 
@@ -146,7 +147,7 @@ fun FarmerTopbar(navController: NavHostController, viewModel: ScaffoldViewModel 
 }
 
 @Composable
-fun FarmerFab(navController: NavHostController) {
+fun FarmerFab(navController: NavController) {
     FloatingActionButton(onClick = {
         navController.navigate("chatbot")
     }) {
@@ -159,7 +160,7 @@ fun FarmerFab(navController: NavHostController) {
 }
 
 @Composable
-fun FarmerAddButton() {
+fun FarmerAddButton(navController: NavController) {
     FloatingActionButton(onClick = {
 
     }) {

@@ -24,15 +24,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.R
+import com.example.farm2u.navigation.Screens
 import com.example.farm2u.viewModel.HomeViewModel
 import com.example.farm2u.viewModel.ScaffoldViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ScaffoldScreen(navController: NavHostController, viewModel: ScaffoldViewModel) {
+fun ScaffoldScreen(navController: NavController, viewModel: ScaffoldViewModel) {
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -47,22 +49,22 @@ fun ScaffoldScreen(navController: NavHostController, viewModel: ScaffoldViewMode
             }
         }
     ) {
-        ContentScreen()
+        ContentScreen(navController)
     }
 }
 
 @Composable
-fun ContentScreen(viewModel: ScaffoldViewModel = viewModel()) {
+fun ContentScreen(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
     when(viewModel.selectedIndex.intValue) {
-        0 -> Home(navController = rememberNavController(), viewModel = HomeViewModel())
-        1 -> Favourites()
-        2 -> ShoppingCart()
-        3 -> Negotiate(navController = rememberNavController())
+        0 -> Home(navController, viewModel = HomeViewModel())
+        1 -> Favourites(navController)
+        2 -> ShoppingCart(navController)
+        3 -> Negotiate(navController)
     }
 }
 
 @Composable
-fun Fab(navController: NavHostController) {
+fun Fab(navController: NavController) {
     FloatingActionButton(onClick = {
         navController.navigate("chatbot")
     }) {
@@ -93,7 +95,7 @@ fun BottomNavigation(viewModel: ScaffoldViewModel = viewModel()) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Topbar(navController: NavHostController, viewModel: ScaffoldViewModel = viewModel()) {
+fun Topbar(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
     TopAppBar(
         navigationIcon = {
             Image(painterResource(R.drawable.no_bg_logo_2),
@@ -127,6 +129,7 @@ fun Topbar(navController: NavHostController, viewModel: ScaffoldViewModel = view
                     text = { Text("Profile") },
                     onClick = {
                         //a dropdown menu appear to choose a language
+                        navController.navigate(Screens.Profile.route)
                         viewModel.expanded.value = false
                     }
                 )

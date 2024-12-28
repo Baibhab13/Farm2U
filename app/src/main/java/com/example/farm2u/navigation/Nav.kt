@@ -68,7 +68,7 @@ fun Nav() {
             }
 
             composable(Screens.Favourites.route) {
-                Favourites()
+                Favourites(navcontroller =  navCtrl)
             }
 
             composable(Screens.Chatbot.route) {

@@ -35,14 +35,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.farm2u.model.GridItem
 import com.example.farm2u.navigation.Screens
 import com.example.farm2u.viewModel.FarmerHomeViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FarmerHome(navController: NavHostController) {
+fun FarmerHome(navController: NavController) {
     Scaffold (
         modifier = Modifier
             .fillMaxSize()
