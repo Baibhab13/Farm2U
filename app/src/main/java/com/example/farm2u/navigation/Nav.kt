@@ -11,6 +11,7 @@ import androidx.navigation.navigation
 import com.example.farm2u.view.AboutUs
 import com.example.farm2u.view.AddItems
 import com.example.farm2u.view.ChatPage
+import com.example.farm2u.view.ChatScreen
 import com.example.farm2u.view.Crop
 import com.example.farm2u.view.Farm
 import com.example.farm2u.view.FarmerScaffold
@@ -110,6 +111,13 @@ fun Nav() {
 
             composable(Screens.AddItems.route) {
                 AddItems(navController = navCtrl)
+            }
+
+            composable("chat/{userName}") { backStackEntry ->
+                val userName = backStackEntry.arguments?.getString("userName")
+                userName?.let {
+                    ChatScreen(navController=navCtrl, userName)
+                }
             }
         }
     }
