@@ -19,9 +19,9 @@ sealed class Screens(val route: String) {
     object Inventory : Screens(route = "inventory")
     object History : Screens(route = "history")
     object Crop : Screens(route = "crop")
+    object AddItems : Screens(route = "add items")
 
     object Auth : Screens(route = "auth")
     object Sell : Screens(route = "sell")
     object Buy : Screens(route = "buy")
-
 }

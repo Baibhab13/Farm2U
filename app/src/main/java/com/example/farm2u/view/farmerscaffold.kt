@@ -29,6 +29,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.R
+import com.example.farm2u.navigation.Screens
 import com.example.farm2u.viewModel.ScaffoldViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -162,7 +163,7 @@ fun FarmerFab(navController: NavController) {
 @Composable
 fun FarmerAddButton(navController: NavController) {
     FloatingActionButton(onClick = {
-
+        navController.navigate(Screens.AddItems.route)
     }) {
         Icon(
             imageVector = Icons.Default.Add,

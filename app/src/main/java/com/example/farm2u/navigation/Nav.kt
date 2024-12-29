@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.farm2u.view.AboutUs
+import com.example.farm2u.view.AddItems
 import com.example.farm2u.view.ChatPage
 import com.example.farm2u.view.Crop
 import com.example.farm2u.view.Farm
@@ -105,6 +106,10 @@ fun Nav() {
 
             composable(Screens.Crop.route) {
                 Crop(navController = navCtrl)
+            }
+
+            composable(Screens.AddItems.route) {
+                AddItems(navController = navCtrl)
             }
         }
     }
