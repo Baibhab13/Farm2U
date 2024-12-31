@@ -85,16 +85,15 @@ fun FarmerBottomNavigation(viewModel: ScaffoldViewModel = viewModel()) {
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FarmerTopbar(navController: NavHostController, viewModel: ScaffoldViewModel = viewModel()) {
+fun FarmerTopbar(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
     TopAppBar(
         navigationIcon = {
-            Image(painterResource(R.drawable.no_bg_logo_2),
+            Image(
+                painterResource(R.drawable.no_bg_logo_2),
                 contentDescription = "logo",
-                modifier = Modifier.size(30.dp)
-                    .padding(5.dp),
+                modifier = Modifier.size(30.dp).padding(5.dp)
             )
         },
         title = {
@@ -106,7 +105,7 @@ fun FarmerTopbar(navController: NavHostController, viewModel: ScaffoldViewModel 
             }
         },
         actions = {
-            //Dropdown Menu
+            // Dropdown Menu
             IconButton(onClick = { viewModel.expanded.value = true }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
@@ -121,7 +120,8 @@ fun FarmerTopbar(navController: NavHostController, viewModel: ScaffoldViewModel 
                 DropdownMenuItem(
                     text = { Text("Profile") },
                     onClick = {
-                        //a dropdown menu appear to choose a language
+                        // Navigate to the Profile screen
+                        navController.navigate(Screens.Profile2.route)
                         viewModel.expanded.value = false
                     }
                 )
@@ -147,6 +147,7 @@ fun FarmerTopbar(navController: NavHostController, viewModel: ScaffoldViewModel 
         }
     )
 }
+
 
 @Composable
 fun FarmerFab(navController: NavController) {

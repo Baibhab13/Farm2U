@@ -1,9 +1,12 @@
 package com.example.farm2u.navigation
 
+import Login
+import SignUp
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -22,10 +25,12 @@ import com.example.farm2u.view.History
 import com.example.farm2u.view.Home
 import com.example.farm2u.view.Inventory
 import com.example.farm2u.view.LandingPage
-import com.example.farm2u.view.Login
+import com.example.farm2u.view.NegotiatePriceScreen
+import com.example.farm2u.view.OrderDetailScreen
 import com.example.farm2u.view.Profile
 import com.example.farm2u.view.ScaffoldScreen
-import com.example.farm2u.view.SignUp
+import com.example.farm2u.view.TrackOrderScreen
+import com.example.farm2u.view.VerificationPage
 
 @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
 @Composable
@@ -55,6 +60,15 @@ fun Nav() {
             composable(Screens.ForgotPassword.route) {
                 ForgotPassword(navController = navCtrl)
             }
+            composable("verification") {
+                VerificationPage(navController = navCtrl)
+            }
+            composable("profile") { Profile(navController = navCtrl) }
+            composable(Screens.FarmerScaffold.route) { FarmerScaffold(navController = navCtrl, viewModel = viewModel()) }
+            composable(Screens.Profile.route) { Profile(navController = navCtrl)  }
+            composable("negotiate price") {
+                NegotiatePriceScreen(navController = navCtrl)
+            }
         }
 
 
@@ -80,6 +94,7 @@ fun Nav() {
             composable(Screens.Profile.route) {
                 Profile(navController = navCtrl)
             }
+
         }
 
         ///////////////////* Farmer's Screen */////////////////////////////////
@@ -118,6 +133,14 @@ fun Nav() {
                 userName?.let {
                     ChatScreen(navController=navCtrl, userName)
                 }
+            }
+            composable("order_detail/{productName}") { backStackEntry ->
+                val productName = backStackEntry.arguments?.getString(Screens.OrderDetailScreen.route) ?: ""
+                OrderDetailScreen(navController = navCtrl, productName = productName)
+            }
+
+            composable("track_order") {
+                TrackOrderScreen(navController=navCtrl)
             }
         }
     }

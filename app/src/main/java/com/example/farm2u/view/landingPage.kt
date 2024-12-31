@@ -11,11 +11,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,28 +20,52 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.farm2u.R
+import android.content.Context
+import android.content.res.Configuration
+import androidx.compose.ui.platform.LocalContext
+import java.util.Locale
+
 import com.example.farm2u.model.FAQItem
 import com.example.farm2u.viewModel.LandingPageViewModel
 
 @Composable
 fun LandingPage(navController: NavHostController, viewModel: LandingPageViewModel = viewModel()) {
+    var selectedLanguage by remember { mutableStateOf("English") }
+    val context = LocalContext.current  // Get current context
     val faqItems = viewModel.faqItems
+
+    // Recompose when the language changes
+    LaunchedEffect(selectedLanguage) {
+        // Update locale whenever language changes
+        setLocale(context, selectedLanguage)
+    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
+        // Language Selector
+        LanguageSelector(
+            selectedLanguage = selectedLanguage,
+            onLanguageChange = { newLanguage ->
+                if (newLanguage != selectedLanguage) {
+                    selectedLanguage = newLanguage
+                }
+            }
+        )
+
         Header(navController)
 
         Text(
-            text = "Why choose FARM2YOU",
+            text = stringResource(id = R.string.why_choose_farm2u),  // Use string resource
             fontSize = 32.sp,
             color = colorResource(id = R.color.teal_700),
             modifier = Modifier
@@ -62,6 +82,62 @@ fun LandingPage(navController: NavHostController, viewModel: LandingPageViewMode
         FAQSection(faqItems)
         Footer(navController)
     }
+}
+
+@Composable
+fun LanguageSelector(selectedLanguage: String, onLanguageChange: (String) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        contentAlignment = Alignment.TopEnd
+    ) {
+        Column {
+            // Dropdown trigger button
+            Button(onClick = { expanded = !expanded }) {
+                Text(text = selectedLanguage)
+            }
+
+            // Dropdown menu
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                // Toggle languages
+                DropdownMenuItem(
+                    onClick = {
+                        expanded = false
+                        onLanguageChange("Hindi")
+                    },
+                    text = { Text(text = "English") }
+                )
+                DropdownMenuItem(
+                    onClick = {
+                        expanded = false
+                        onLanguageChange("English")
+                    },
+                    text = { Text(text = "Hindi") }
+                )
+            }
+        }
+    }
+}
+
+// Set the Locale based on selected language
+fun setLocale(context: Context, language: String) {
+    val locale = when (language) {
+        "Hindi" -> Locale("hi")
+        else -> Locale("en")
+    }
+    Locale.setDefault(locale)
+
+    val config = context.resources.configuration
+    config.setLocale(locale)
+
+    // Update the configuration context to reflect the new locale
+    context.resources.updateConfiguration(config, context.resources.displayMetrics)
 }
 
 @Composable
@@ -235,4 +311,3 @@ fun Footer(navController: NavHostController) {
         }
     }
 }
-

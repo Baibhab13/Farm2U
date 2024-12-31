@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.farm2u.R
 import com.example.farm2u.model.GridItem
 import com.example.farm2u.navigation.Screens
 import com.example.farm2u.viewModel.FarmerHomeViewModel
@@ -52,17 +53,21 @@ fun FarmerHome(navController: NavController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row (
-                modifier = Modifier.fillMaxWidth().padding(10.dp)
-                    .background(color = Color(0xFF3795BD))
-                    .height(180.dp).clip(RoundedCornerShape(10.dp)),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Weather"
-                )
-            }
+//            Row (
+//                modifier = Modifier.fillMaxWidth().padding(10.dp)
+//                    .background(color = Color(0xFF3795BD))
+//                    .height(180.dp).clip(RoundedCornerShape(10.dp)),
+//                horizontalArrangement = Arrangement.Center,
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//                Text(
+//                    text = "Weather"
+//                )
+//            }
+            Image(
+                painter = painterResource(R.drawable.weather),
+                contentDescription = "weather"
+            )
             HorizontalDivider(
                 color = Color.Black,
                 thickness = 1.dp,

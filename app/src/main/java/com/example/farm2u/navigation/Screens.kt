@@ -20,8 +20,13 @@ sealed class Screens(val route: String) {
     object History : Screens(route = "history")
     object Crop : Screens(route = "crop")
     object AddItems : Screens(route = "add items")
+    object Profile2 : Screens(route = "profile2")
 
     object Auth : Screens(route = "auth")
     object Sell : Screens(route = "sell")
     object Buy : Screens(route = "buy")
+    object FarmerOrders : Screens("farmer_orders")
+    object OrderDetailScreen : Screens("order_detail")
+    object TrackOrderScreen : Screens("track_order")
 }
+

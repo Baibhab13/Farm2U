@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Farm2U</string>
+    <string name="why_choose_farm2u">Why choose FARM2YOU</string>
+    <string name="faq_section">Frequently Asked Questions</string>
 </resources>
