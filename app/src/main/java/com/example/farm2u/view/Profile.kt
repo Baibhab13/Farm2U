@@ -20,7 +20,7 @@ import com.example.farm2u.R
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Profile2(navController: NavController) {
+fun Profile(navController: NavController) {
     var farmerName by remember { mutableStateOf("") }
     var farmerPhone by remember { mutableStateOf("") }
     var farmerLocation by remember { mutableStateOf("") }

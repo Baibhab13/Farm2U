@@ -1,4 +1,4 @@
-package com.example.farm2u.view
+package com.example.farm2u.view.farmer
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 
 @Composable
-fun History(navController: NavHostController) {
+fun Inventory(navController: NavHostController) {
     Column (
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ){
-        Text(text = "History")
+        Text(text = "Inventory")
     }
 }

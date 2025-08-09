@@ -1,6 +1,5 @@
 package com.example.farm2u.view
 
-import FarmerAdd
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -19,10 +17,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -31,81 +29,91 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.farm2u.R
 import com.example.farm2u.navigation.Screens
+import com.example.farm2u.viewModel.HomeViewModel
 import com.example.farm2u.viewModel.ScaffoldViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun FarmerScaffold(navController: NavController,viewModel: ScaffoldViewModel) {
-    Scaffold(
+fun ScaffoldScreen(navController: NavController, viewModel: ScaffoldViewModel) {
+    Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            FarmerTopbar(navController = rememberNavController())
+            Topbar(navController = rememberNavController())
         },
         bottomBar = {
-            FarmerBottomNavigation()
+            BottomNavigation()
         },
         floatingActionButton = {
             when(viewModel.selectedIndex.intValue) {
-                0 -> FarmerFab(navController)
-                1 -> FarmerAddButton(navController)
+                0 -> Fab(navController)
             }
-
         }
     ) {
-        FarmerContentScreen(navController)
+        ContentScreen(navController)
     }
 }
 
 @Composable
-fun FarmerContentScreen(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
+fun ContentScreen(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
     when(viewModel.selectedIndex.intValue) {
-        0 -> FarmerHome(
-            navController
-        )
-        1 -> FarmerAdd(navController)
-        2 -> FarmerOrders(navController)
-        3 -> FarmerNegotiate(navController)
+        0 -> Home(navController, viewModel = HomeViewModel())
+        1 -> Favourites(navController)
+        2 -> ShoppingCart(navController)
+        3 -> Negotiate(navController)
     }
 }
 
 @Composable
-fun FarmerBottomNavigation(viewModel: ScaffoldViewModel = viewModel()) {
+fun Fab(navController: NavController) {
+    FloatingActionButton(onClick = {
+        navController.navigate("chatbot")
+    }) {
+        Image(painterResource(R.drawable.chatbot),
+            contentDescription = "chatbot",
+            modifier = Modifier.size(35.dp)
+        )
+    }
+}
+
+@Composable
+fun BottomNavigation(viewModel: ScaffoldViewModel = viewModel()) {
     NavigationBar {
-        viewModel.farmerItemList.forEachIndexed { index, _ ->
+        viewModel.navItemList.forEachIndexed { index, _ ->
             NavigationBarItem(
                 selected = viewModel.selectedIndex.intValue == index,
                 onClick = {
                     viewModel.selectedIndex.intValue = index
                 },
-                icon = { Icon(imageVector = viewModel.farmerItemList[index].icon,
-                    contentDescription = viewModel.farmerItemList[index].label)
+                icon = { Icon(imageVector = viewModel.navItemList[index].icon,
+                    contentDescription = viewModel.navItemList[index].label)
                 },
-                label = { Text(text = viewModel.farmerItemList[index].label) }
+                label = { Text(text = viewModel.navItemList[index].label) }
             )
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FarmerTopbar(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
+fun Topbar(navController: NavController, viewModel: ScaffoldViewModel = viewModel()) {
     TopAppBar(
         navigationIcon = {
-            Image(
-                painterResource(R.drawable.no_bg_logo_2),
+            Image(painterResource(R.drawable.no_bg_logo_2),
                 contentDescription = "logo",
-                modifier = Modifier.size(30.dp).padding(5.dp)
+                modifier = Modifier.size(30.dp)
+                    .padding(5.dp),
             )
         },
         title = {
             when(viewModel.selectedIndex.intValue) {
                 0 -> Text("Farm2U")
-                1 -> Text("Add")
-                2 -> Text("Orders")
+                1 -> Text("Favourites")
+                2 -> Text("Shopping Cart")
                 3 -> Text("Negotiation")
             }
         },
         actions = {
-            // Dropdown Menu
+            //Dropdown Menu
             IconButton(onClick = { viewModel.expanded.value = true }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
@@ -120,8 +128,8 @@ fun FarmerTopbar(navController: NavController, viewModel: ScaffoldViewModel = vi
                 DropdownMenuItem(
                     text = { Text("Profile") },
                     onClick = {
-                        // Navigate to the Profile screen
-                        navController.navigate(Screens.Profile2.route)
+                        //a dropdown menu appear to choose a language
+                        navController.navigate(Screens.Profile.route)
                         viewModel.expanded.value = false
                     }
                 )
@@ -146,30 +154,4 @@ fun FarmerTopbar(navController: NavController, viewModel: ScaffoldViewModel = vi
             }
         }
     )
-}
-
-
-@Composable
-fun FarmerFab(navController: NavController) {
-    FloatingActionButton(onClick = {
-        navController.navigate("chatbot")
-    }) {
-        Image(
-            painterResource(R.drawable.chatbot),
-            contentDescription = "chatbot",
-            modifier = Modifier.size(35.dp)
-        )
-    }
-}
-
-@Composable
-fun FarmerAddButton(navController: NavController) {
-    FloatingActionButton(onClick = {
-        navController.navigate(Screens.AddItems.route)
-    }) {
-        Icon(
-            imageVector = Icons.Default.Add,
-            contentDescription = "Add"
-        )
-    }
 }

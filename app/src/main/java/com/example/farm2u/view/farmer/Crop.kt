@@ -1,4 +1,4 @@
-package com.example.farm2u.view
+package com.example.farm2u.view.farmer
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

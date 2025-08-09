@@ -1,4 +1,4 @@
-package com.example.farm2u.view
+package com.example.farm2u.view.buyer
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement

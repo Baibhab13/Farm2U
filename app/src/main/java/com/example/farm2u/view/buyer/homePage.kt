@@ -1,4 +1,4 @@
-package com.example.farm2u.view
+package com.example.farm2u.view.buyer
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -103,9 +103,6 @@ fun ProductsCard(index: Int, viewModel: HomeViewModel) {
             .fillMaxWidth(), // Make card fill the available width
         elevation = CardDefaults.cardElevation(4.dp), // Increase elevation for a subtle shadow
         shape = RoundedCornerShape(12.dp), // Softer corner radius
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        )
     ) {
         Column(
             modifier = Modifier.padding(10.dp), // Increased padding inside the card
@@ -161,7 +158,7 @@ fun ProductsCard(index: Int, viewModel: HomeViewModel) {
 }
 
 @Composable
-fun CategorySection(viewModel: HomeViewModel = viewModel()) {
+fun CategorySection(viewModel: HomeViewModel = viewModel(),onclick: () -> Unit = {}) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
